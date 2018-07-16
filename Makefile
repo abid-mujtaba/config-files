@@ -1,7 +1,7 @@
 # Absolute path of the source folder required to create proper symlinks
 SRC:=~/.config/repo
 
-HOMEFILES:=.offlineimaprc .offlineimap.py
+HOMEFILES:=.offlineimaprc .offlineimap.py .Rprofile .xinitrc .Xresources
 
 # Create symbolic links for all user config files
 # Use -f to force creation of the links

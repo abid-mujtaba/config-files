@@ -2,7 +2,9 @@
 SRC:=~/.config/repo
 
 # Create symbolic links for all user config files
+# Use -f to force creation of the links
 user:
-	ln -s $(SRC)/user/.offlineimap.py ~/.offlineimap.py
+	ln -sf $(SRC)/user/.offlineimap.py ~/
+	ln -sf $(SRC)/user/.offlineimaprc ~/
 
 .PHONY: user root

@@ -1,0 +1,61 @@
+[general]
+accounts = gmail,comsats
+pythonfile = ~/.offlineimap.py
+
+
+[mbnames]
+# Create a configuration file that mutt can use to detect folders
+enabled = yes
+filename = ~/.mutt/muttrc.mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+
+[Account gmail]
+localrepository = gmail-local
+remoterepository = gmail-remote
+# Only copy emails that are less than 60 days old
+maxage = 60
+
+
+[Repository gmail-local]
+type = Maildir
+localfolders = ~/mail/gmail
+
+
+[Repository gmail-remote]
+type = Gmail
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+# Use the get_user() function defined in .offlineimap.py to get the user
+remoteusereval = get_user("gmail")
+# Use the get_pass() function defined in .offlineimap.py to get the password
+remotepasseval = get_pass("gmail")
+# Nested Subs to read backwards. The conversion to lowercase happens first
+nametrans = lambda foldername: re.sub('INBOX', 'Inbox', 
+							   re.sub('\[Gmail\].All Mail', 'Archive', 
+							   re.sub('\[Gmail\].Sent Mail', 'Sent', foldername)))
+folderfilter = lambda foldername: foldername in ['INBOX', '[Gmail]/Sent Mail', '[Gmail]/All Mail']
+
+
+[Account comsats]
+localrepository = comsats-local
+remoterepository = comsats-remote
+maxage = 60
+
+
+[Repository comsats-local]
+type = Maildir
+localfolders = ~/mail/comsats
+
+
+[Repository comsats-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remotehost = outlook.office365.com
+remoteusereval = get_user("comsats")
+remotepasseval = get_pass("comsats")
+folderfilter = lambda foldername: foldername in ['INBOX', 'Archive', 'Sent']
+nametrans = lambda foldername: re.sub('INBOX', 'Inbox', foldername)

@@ -3,16 +3,6 @@ accounts = gmail,comsats
 pythonfile = ~/.offlineimap.py
 
 
-[mbnames]
-# Create a configuration file that mutt can use to detect folders
-enabled = yes
-filename = ~/.mutt/muttrc.mailboxes
-header = "mailboxes "
-peritem = "+%(accountname)s/%(foldername)s"
-sep = " "
-footer = "\n"
-
-
 [Account gmail]
 localrepository = gmail-local
 remoterepository = gmail-remote

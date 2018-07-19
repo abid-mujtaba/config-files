@@ -35,8 +35,10 @@ remotepasseval = get_pass("gmail")
 # Nested Subs to read backwards. The conversion to lowercase happens first
 nametrans = lambda foldername: re.sub('INBOX', 'Inbox', 
 							   re.sub('\[Gmail\].All Mail', 'Archive', 
-							   re.sub('\[Gmail\].Sent Mail', 'Sent', foldername)))
-folderfilter = lambda foldername: foldername in ['INBOX', '[Gmail]/Sent Mail', '[Gmail]/All Mail']
+							   re.sub('\[Gmail\].Sent Mail', 'Sent',
+							   re.sub('\[Gmail\].Trash', 'Trash',
+							   re.sub('\[Gmail\].Drafts', 'Drafts', foldername)))))
+folderfilter = lambda foldername: foldername in ['INBOX', '[Gmail]/Sent Mail', '[Gmail]/All Mail', '[Gmail]/Trash', '[Gmail]/Drafts']
 
 
 [Account comsats]
@@ -57,5 +59,5 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 remotehost = outlook.office365.com
 remoteusereval = get_user("comsats")
 remotepasseval = get_pass("comsats")
-folderfilter = lambda foldername: foldername in ['INBOX', 'Archive', 'Sent']
+folderfilter = lambda foldername: foldername in ['INBOX', 'Archive', 'Sent', 'Drafts', 'Trash']
 nametrans = lambda foldername: re.sub('INBOX', 'Inbox', foldername)

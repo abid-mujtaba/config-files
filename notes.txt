@@ -1,0 +1,4 @@
+Mutt:
+
+	Requires the 'runningx' script (in AUR) for mailcap.
+	Requires the 'mutt_bgrun' script for mailcap.

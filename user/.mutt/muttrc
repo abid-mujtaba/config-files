@@ -1,0 +1,85 @@
+# Maildir
+set mbox_type = Maildir
+
+# Account: Comsats
+source "~/.mutt/comsats"
+folder-hook $folder 'source ~/.mutt/comsats'
+
+# Account: Gmail
+source "~/.mutt/gmail"
+folder-hook $folder 'source ~/.mutt/gmail'
+
+# SMTP
+set realname='Abid H. Mujtaba'
+# set sendmail="/usr/bin/ssmtp"
+set use_from = yes
+set ssl_force_tls = yes
+
+set edit_headers=yes
+set editor="/usr/local/bin/vim -c 'set spell spelllang=en'"
+
+set alias_file=~/.mutt/aliases
+
+# Include original message in reply by default
+set include=yes
+
+# Source external config files
+source $alias_file
+source ~/.mutt/notmuchrc
+#source ~/.mutt/sidebarrc
+source ~/.mutt/mutt-colors-neonwolf-256.muttrc
+
+
+# Modify index format
+set date_format="%y-%m-%d %T"
+set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %s"
+
+# Don't include me in group replies
+alternates $my_gmail_user $my_comsats_user
+
+# Poll for new emails every two minutes
+# set timeout=120
+
+
+# Sorting order
+set sort=threads
+set sort_browser=date
+set sort_aux=reverse-last-date-received
+
+
+# Archive, Trash and Delete emails
+# macro index d ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+Trash\n<sync-mailbox>" "Move to Trash"
+# macro index,pager d ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+Trash" "Move to Trash"
+#macro index,pager d ":set delete=yes\n<delete-message>" "Delete Message"
+# macro index,pager A ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+Archive\n<sync-mailbox>" "Archive Message"
+
+macro index,pager A ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+Archive\n" "Archive Message"
+macro index,pager D ":set delete=yes\n<delete-message>" "Delete Message"
+
+# Map / to use notmuch
+macro index / "<vfolder-from-query>"
+
+
+# Deal with html and pdf
+set mailcap_path = ~/.mutt/mailcap
+
+auto_view text/html
+alternative_order text/plain text/html
+
+# Launch browser when V is pressed
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
+
+
+# Change accounts
+#
+# Unbind 't' for two letter macro
+bind pager t noop
+#
+macro index,pager tc "<sync-mailbox><enter-command>source ~/.mutt/comsats<enter><change-folder>!<enter>"
+#
+macro index,pager tg "<sync-mailbox><enter-command>source ~/.mutt/gmail<enter><change-folder>!<enter>"
+
+
+# Display To: address when looking at a sent email (using folder-hooks)
+#folder-hook   *[sS]ent* 'set index_format="%2C | %Z [%d] %-30.30t (%-4.4c) %?M?<%M> ?%s"'
+#folder-hook ! *[sS]ent* 'set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %?M?<%M> ?%s"'

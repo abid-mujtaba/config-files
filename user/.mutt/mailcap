@@ -1,0 +1,11 @@
+text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
+application/pdf; mutt_bgrun vupdf %s; test=runningx
+image/jpeg; mutt_bgrun feh %s; test=runningx
+image/png; mutt_bgrun feh %s; test=runningx
+application/vnd.ms-word.document.12; mutt_bgrun soffice --nologo --base %s; test=runningx; nametemplate=%s.docx
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; mutt_bgrun soffice --nologo --base %s; test=runningx; nametemplate=%s.docx
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; mutt_bgrun soffice --nologo --base %s; test=runningx; nametemplate=%s.xlsx
+application/vnd.ms-excel.sheet.macroenabled.12; mutt_bgrun soffice --nologo --base %s; test=runningx; nametemplate=%s.xlsx
+application/vnd.ms-excel; mutt_bgrun soffice --nologo --base %s; test=runningx; nametemplate=%s.xlsx
+application/msword; mutt_bgrun soffice --nologo --base %s; test=runningx; nametemplate=%s.doc
+application/vnd.openxmlformats; mutt_bgrun soffice --nologo --base %s; test=runningx; nametemplate=%s.docx

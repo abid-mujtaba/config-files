@@ -1,0 +1,15 @@
+# Mailbox
+set folder = "~/mail/comsats"
+mailboxes = "+Inbox" "+Sent" "+Archive" "+Drafts"
+set spoolfile = "+Inbox"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+
+# SMTP
+# Get credentials from 'pass' using shell commands
+set my_comsats_user = ""`pass email/comsats/user`""
+set my_comsats_pw = ""`pass email/comsats/password`""
+
+set from=$my_comsats_user
+set smtp_url=smtps://$my_comsats_user:$my_comsats_pw@smtp.office365.com

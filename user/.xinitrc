@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set variable in systemd for dunst (notification deamon)
+systemctl --user set-environment DISPLAY=:0
+
 xrdb -merge .Xresources
 slstatus &
 

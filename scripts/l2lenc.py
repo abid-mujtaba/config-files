@@ -10,12 +10,33 @@
 # The encrypted/decrypted file is output to stdout
 
 import click
+from Crypto.Cipher import AES
+from subprocess import check_output
+
 
 def fn_encrypt(filename):
-    pass
+
+    es = encryption_suite()
+
+    with open(filename) as fin:
+        for line in fin.readlines():
+            print(es.encrypt(line.strip()[:16]))
+
 
 def fn_decrypt(filename):
+
     pass
+
+
+def encryption_suite():
+    """
+    Fetch AES Key and InitialValue from 'pass' (gpg front-end) and use it to create the AES encryption suite.
+    """
+    key = check_output("pass config/aliases/key", shell=True).splitlines()[0]
+    iv = check_output("pass config/aliases/iv", shell=True).splitlines()[0]
+
+    return AES.new(key, AES.MODE_CBC, iv)
+    
 
 
 @click.command()

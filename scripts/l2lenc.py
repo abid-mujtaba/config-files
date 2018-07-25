@@ -55,7 +55,7 @@ def fn_encrypt(filename):
 
 def encrypt_line(line):
     """
-    Encrypt a single line of clear text and return a Base64 encoded string containing the cipher text.
+    Encrypt a single line of clear text and return a Base64 encoded STRING containing the cipher text.
     """
 
     # Strip whitespace from right of the string
@@ -77,7 +77,7 @@ def encrypt_line(line):
     # Encode the output using base64
     enc = base64.b64encode(ivepl)
 
-    return enc
+    return enc.decode("UTF8")
 
 
 def fn_decrypt(filename):
@@ -96,6 +96,9 @@ def decrypt_line(line):
 
     # Strip whitespace from the string
     line = line.rstrip()
+
+    # Convert the string to a bytes object
+    line = bytes(line, "UTF8")
 
     # Decode the base64 encoding
     dpl = base64.b64decode(line)

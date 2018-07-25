@@ -22,6 +22,34 @@ class TestPad(unittest.TestCase):
         self.assertEqual(l2lenc.pad("abcd1234defg5678hijk9012lmn"), "abcd1234defg5678hijk9012lmn{{{{{")
 
 
+class TestUnPad(unittest.TestCase):
+    """
+    Test the removal of padding characters from a string.
+    """
+
+    def test_full(self):
+        self.assertEqual(l2lenc.unpad("abcd1234efgh5678"), "abcd1234efgh5678")
+
+    def test_partial(self):
+        self.assertEqual(l2lenc.unpad("abcd1234efgh5{{{"), "abcd1234efgh5")
+
+    def test_super_partial(self):
+        self.assertEqual(l2lenc.unpad("abcd1234defg5678hijk9012lmn{{{{{"), "abcd1234defg5678hijk9012lmn")
+
+
+class TestPadUnPad(unittest.TestCase):
+    """
+    Test the unpadding of padded strings (cycle)
+    """
+
+    def test_pad_unpad(self):
+        self.assertEqual(l2lenc.unpad(l2lenc.pad("Test")), "Test")
+        self.assertEqual(l2lenc.unpad(l2lenc.pad("abcd1234efgh5678")), "abcd1234efgh5678")
+        self.assertEqual(l2lenc.unpad(l2lenc.pad("abcd1234efgh5")), "abcd1234efgh5")
+        self.assertEqual(l2lenc.unpad(l2lenc.pad("abcd1234defg5678hijk9012lmn")), "abcd1234defg5678hijk9012lmn")
+
+
+
 class TestEncryptionSuite(unittest.TestCase):
     """
     Test the creation of the encryption suite.

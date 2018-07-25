@@ -9,8 +9,10 @@
 #
 # The encrypted/decrypted file is output to stdout
 
+import base64
 import click
 from Crypto.Cipher import AES
+from Crypto import Random
 from subprocess import check_output
 
 
@@ -34,26 +36,66 @@ def pad(s):
 
 def fn_encrypt(filename):
 
-    es = encryption_suite()
+    iv, es = encryption_suite()
 
     with open(filename) as fin:
+
         for line in fin.readlines():
-            print(es.encrypt(line.strip()[:16]))
+
+            # Strip whitespace from right of the string
+            line = line.rstrip()
+
+            # Pad line with PADDING character and covert to 'bytes'
+            bpl = bytes(pad( line ), "UTF8")
+
+            # Pad the string
+            # Encrypt it using the suite
+            # Prepend the random IV coupled with the encryption suite
+
+            # Encode the resulting string using base64
+            # enc = base64.b64encode( es.encrypt( iv + bpl ) )
+
+            epl = iv + es.encrypt( pad(line) )
+            enc = base64.b64encode(epl)
+            print(enc)
+
 
 
 def fn_decrypt(filename):
 
-    pass
+    # es = encryption_suite()
+
+    with open(filename) as fin:
+
+        for line in fin.readlines():
+
+            # Strip whitespace from the string
+            line = line.rstrip()
+            dpl = base64.b64decode(line)
+            iv = dpl[:16]
+
+            iv, es = encryption_suite(iv)
+
+            # Decode the base64 encoding
+            # Decrypt using the suite
+            # Remove the PADDING from the right end)
+
+            # dec = es.decrypt( base64.b64decode(line) ).rstrip(PADDING) 
+            dec = es.decrypt(line)#.rstrip(PADDING)
+            print(dec)
 
 
-def encryption_suite():
+def encryption_suite(iv=None):
     """
     Fetch AES Key and InitialValue from 'pass' (gpg front-end) and use it to create the AES encryption suite.
     """
     key = check_output("pass config/aliases/key", shell=True).splitlines()[0]
-    iv = check_output("pass config/aliases/iv", shell=True).splitlines()[0]
+    # iv = check_output("pass config/aliases/iv", shell=True).splitlines()[0]
 
-    return AES.new(key, AES.MODE_CBC, iv)
+    if not iv:
+        iv = Random.new().read(AES.block_size)
+
+    return iv, AES.new(key, AES.MODE_CFB, iv)
     
 
 

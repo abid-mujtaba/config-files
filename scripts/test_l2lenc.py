@@ -53,6 +53,35 @@ class TestEncryptionSuite(unittest.TestCase):
         self.assertEqual(iv, IV)
 
 
+class TestEncryptLine(unittest.TestCase):
+    """
+    Test the encryption of a single line
+    """
+
+    def test_encryption(self):
+
+        pass
+        # el = l2lenc.encrypt_line("Hello\n")
+        # print(el)
+
+
+class TestEncryptDecryptLine(unittest.TestCase):
+    """
+    Test the decryption of a single line
+    """
+
+    def test_enc_dec(self):
+
+        PLAINTXT = "Hello"
+        el = l2lenc.encrypt_line(PLAINTXT)
+        print(el)
+
+        dl = l2lenc.decrypt_line(el)
+        print(dl)
+
+        self.assertEqual(dl, PLAINTXT)
+
+
 if __name__ == '__main__':
 
     unittest.main()

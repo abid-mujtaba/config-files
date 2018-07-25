@@ -3,8 +3,10 @@
 # Unit Tests for the l2lenc.py module.
 
 
-import l2lenc
+import base64
 import unittest
+
+import l2lenc
 
 
 class TestPad(unittest.TestCase):
@@ -81,6 +83,51 @@ class TestEncryptionSuite(unittest.TestCase):
         self.assertEqual(iv, IV)
 
 
+class TestEncryptDecryptString(unittest.TestCase):
+    """
+    Encrypt and Decrypt a test string to test cycle.
+    """
+
+    def test_cycle(self):
+
+        PLAINTXT = bytes("0123456789abcdef", "UTF8")
+        iv, es = l2lenc.encryption_suite()
+        
+        et = es.encrypt(PLAINTXT)
+        ivet = iv + et
+
+        iv, es = l2lenc.encryption_suite(ivet[:16])
+        dt = es.decrypt(ivet)
+
+        self.assertEqual(dt[16:], PLAINTXT)
+
+
+    def test_cycle_padded_b64(self):
+        """
+        Test encryption decryption cycle of a string using padding.
+        """
+
+        PLAINTXT = "0123456789abc"
+        pt = l2lenc.pad(PLAINTXT)
+        bpt = bytes(pt, "UTF8")
+
+        iv, es = l2lenc.encryption_suite()
+        
+        et = es.encrypt(bpt)
+        ivet = iv + et
+
+        bivet = base64.b64encode(ivet)
+        divet = base64.b64decode(bivet)
+
+        iv, es = l2lenc.encryption_suite(divet[:16])
+        dt = es.decrypt(ivet)
+        sdt = dt[16:].decode("UTF8")
+        upt = l2lenc.unpad(sdt)
+
+        self.assertEqual(upt, PLAINTXT)
+
+
+
 class TestEncryptLine(unittest.TestCase):
     """
     Test the encryption of a single line
@@ -102,10 +149,10 @@ class TestEncryptDecryptLine(unittest.TestCase):
 
         PLAINTXT = "Hello"
         el = l2lenc.encrypt_line(PLAINTXT)
-        print(el)
+
+        print()
 
         dl = l2lenc.decrypt_line(el)
-        print(dl)
 
         self.assertEqual(dl, PLAINTXT)
 

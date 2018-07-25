@@ -36,29 +36,37 @@ def pad(s):
 
 def fn_encrypt(filename):
 
-    iv, es = encryption_suite()
+    # iv, es = encryption_suite()
 
     with open(filename) as fin:
 
         for line in fin.readlines():
 
-            # Strip whitespace from right of the string
-            line = line.rstrip()
-
-            # Pad line with PADDING character and covert to 'bytes'
-            bpl = bytes(pad( line ), "UTF8")
-
-            # Pad the string
-            # Encrypt it using the suite
-            # Prepend the random IV coupled with the encryption suite
-
-            # Encode the resulting string using base64
-            # enc = base64.b64encode( es.encrypt( iv + bpl ) )
-
-            epl = iv + es.encrypt( pad(line) )
-            enc = base64.b64encode(epl)
+            enc = encrypt_line(line)
             print(enc)
 
+
+def encrypt_line(line):
+    """
+    Encrypt a single line of clear text and return a Base64 encoded string containing the cipher text.
+    """
+
+    # Strip whitespace from right of the string
+    line = line.rstrip()
+
+    # Pad line with PADDING character and covert to 'bytes'
+    bpl = bytes(pad( line ), "UTF8")
+
+    # Create IV and Encryption Suite for this line
+    iv, es = encryption_suite()
+
+    # Encrypt it using the suite
+    # Prepend the random IV coupled with the encryption suite
+
+    epl = iv + es.encrypt( pad(line) )
+    enc = base64.b64encode(epl)
+
+    return enc
 
 
 def fn_decrypt(filename):
@@ -69,20 +77,27 @@ def fn_decrypt(filename):
 
         for line in fin.readlines():
 
-            # Strip whitespace from the string
-            line = line.rstrip()
-            dpl = base64.b64decode(line)
-            iv = dpl[:16]
-
-            iv, es = encryption_suite(iv)
-
-            # Decode the base64 encoding
-            # Decrypt using the suite
-            # Remove the PADDING from the right end)
-
-            # dec = es.decrypt( base64.b64decode(line) ).rstrip(PADDING) 
-            dec = es.decrypt(line)#.rstrip(PADDING)
+            dec = decrypt_line(line)
             print(dec)
+
+
+def decrypt_line(line):
+
+    # Strip whitespace from the string
+    line = line.rstrip()
+    dpl = base64.b64decode(line)
+    iv = dpl[:16]
+
+    iv, es = encryption_suite(iv)
+
+    # Decode the base64 encoding
+    # Decrypt using the suite
+    # Remove the PADDING from the right end)
+
+    # dec = es.decrypt( base64.b64decode(line) ).rstrip(PADDING) 
+    dec = es.decrypt(line)#.rstrip(PADDING)
+
+    return dec
 
 
 def encryption_suite(iv=None):

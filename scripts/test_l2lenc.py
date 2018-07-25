@@ -120,7 +120,7 @@ class TestEncryptDecryptString(unittest.TestCase):
         divet = base64.b64decode(bivet)
 
         iv, es = l2lenc.encryption_suite(divet[:16])
-        dt = es.decrypt(ivet)
+        dt = es.decrypt(divet)
         sdt = dt[16:].decode("UTF8")
         upt = l2lenc.unpad(sdt)
 

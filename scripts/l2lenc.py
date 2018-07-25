@@ -34,6 +34,13 @@ def pad(s):
     return s + extra
 
 
+def unpad(s):
+    """
+    Remove the padding characters from the end of the string.
+    """
+    return s.rstrip(PADDING)
+
+
 def fn_encrypt(filename):
 
     # iv, es = encryption_suite()
@@ -53,18 +60,27 @@ def encrypt_line(line):
 
     # Strip whitespace from right of the string
     line = line.rstrip()
+    print("Line: " + line)
 
     # Pad line with PADDING character and covert to 'bytes'
     bpl = bytes(pad( line ), "UTF8")
+    bprint("Bytes Padded Lines:", bpl)
 
     # Create IV and Encryption Suite for this line
     iv, es = encryption_suite()
+    print("IV:", iv)
 
     # Encrypt it using the suite
     # Prepend the random IV coupled with the encryption suite
 
-    epl = iv + es.encrypt( pad(line) )
-    enc = base64.b64encode(epl)
+    epl = es.encrypt( pad(line) )
+    bprint("Encrypted Padded Line:", epl)
+
+    ivepl = iv + epl
+    bprint("IVed:", ivepl)
+
+    enc = base64.b64encode(ivepl)
+    bprint("B64 encoded:", enc)
 
     return enc
 
@@ -85,17 +101,31 @@ def decrypt_line(line):
 
     # Strip whitespace from the string
     line = line.rstrip()
+    bprint("Line:", line)
+
+    # Decode the base64 encoding
     dpl = base64.b64decode(line)
+    bprint("B64 decoded:", dpl)
+
     iv = dpl[:16]
+    bprint("IV:", iv)
 
     iv, es = encryption_suite(iv)
 
-    # Decode the base64 encoding
     # Decrypt using the suite
-    # Remove the PADDING from the right end)
+    ivdpl = es.decrypt(line)
+    bprint("IV + Decrypted Padded Line:", ivdpl)
 
-    # dec = es.decrypt( base64.b64decode(line) ).rstrip(PADDING) 
-    dec = es.decrypt(line)#.rstrip(PADDING)
+    # Subtract IV from start
+    dpl = ivdpl[16:]
+    bprint("Decrypted Padded Line:", dpl)
+
+    # Convert bytes to string
+    sdpl = dpl.decode("UTF8")
+
+    # Remove the PADDING from the right end
+    dec = unpad( sdpl )
+    print("Decrypted Line: " + dec)
 
     return dec
 
@@ -111,7 +141,14 @@ def encryption_suite(iv=None):
         iv = Random.new().read(AES.block_size)
 
     return iv, AES.new(key, AES.MODE_CFB, iv)
-    
+
+
+def bprint(s, b):
+    """
+    Print a message 's' along with a bytes object 'b' on the same line.
+    """
+    print(s, end=' ')
+    print(b)
 
 
 @click.command()

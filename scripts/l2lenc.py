@@ -14,6 +14,24 @@ from Crypto.Cipher import AES
 from subprocess import check_output
 
 
+PADDING = '{'       # Padding character for encryption (should not appear at the end of the text)
+BLOCKSIZE = 16
+
+
+def pad(s):
+    """
+    Function for padding text so that it is in multiples of the BLOCKSIZE
+    """
+
+    # Calculate the number of padding characters to be inserted
+    if len(s) % BLOCKSIZE == 0:     # If len(s) is a multiple of the BLOCKSIZE then NO extra characters need to be padded
+        extra = ''
+    else:
+        extra = ( BLOCKSIZE - (len(s) % BLOCKSIZE) ) * PADDING
+
+    return s + extra
+
+
 def fn_encrypt(filename):
 
     es = encryption_suite()

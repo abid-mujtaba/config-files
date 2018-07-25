@@ -60,27 +60,22 @@ def encrypt_line(line):
 
     # Strip whitespace from right of the string
     line = line.rstrip()
-    print("Line: " + line)
 
     # Pad line with PADDING character and covert to 'bytes'
     bpl = bytes(pad( line ), "UTF8")
-    bprint("Bytes Padded Lines:", bpl)
 
     # Create IV and Encryption Suite for this line
     iv, es = encryption_suite()
-    print("IV:", iv)
+
 
     # Encrypt it using the suite
-    # Prepend the random IV coupled with the encryption suite
-
     epl = es.encrypt( pad(line) )
-    bprint("Encrypted Padded Line:", epl)
 
+    # Prepend the random IV coupled with the encryption suite
     ivepl = iv + epl
-    bprint("IVed:", ivepl)
 
+    # Encode the output using base64
     enc = base64.b64encode(ivepl)
-    bprint("B64 encoded:", enc)
 
     return enc
 
@@ -101,31 +96,27 @@ def decrypt_line(line):
 
     # Strip whitespace from the string
     line = line.rstrip()
-    bprint("Line:", line)
 
     # Decode the base64 encoding
     dpl = base64.b64decode(line)
-    bprint("B64 decoded:", dpl)
 
+    # Extract the prepended IV
     iv = dpl[:16]
-    bprint("IV:", iv)
 
+    # Construct encryption suite from the extracted IV
     iv, es = encryption_suite(iv)
 
     # Decrypt using the suite
-    ivdpl = es.decrypt(line)
-    bprint("IV + Decrypted Padded Line:", ivdpl)
+    ivdpl = es.decrypt(dpl)
 
     # Subtract IV from start
     dpl = ivdpl[16:]
-    bprint("Decrypted Padded Line:", dpl)
 
     # Convert bytes to string
     sdpl = dpl.decode("UTF8")
 
     # Remove the PADDING from the right end
     dec = unpad( sdpl )
-    print("Decrypted Line: " + dec)
 
     return dec
 

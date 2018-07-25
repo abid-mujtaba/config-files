@@ -128,18 +128,6 @@ class TestEncryptDecryptString(unittest.TestCase):
 
 
 
-class TestEncryptLine(unittest.TestCase):
-    """
-    Test the encryption of a single line
-    """
-
-    def test_encryption(self):
-
-        pass
-        # el = l2lenc.encrypt_line("Hello\n")
-        # print(el)
-
-
 class TestEncryptDecryptLine(unittest.TestCase):
     """
     Test the decryption of a single line
@@ -147,14 +135,11 @@ class TestEncryptDecryptLine(unittest.TestCase):
 
     def test_enc_dec(self):
 
+        el = l2lenc.encrypt_line
+        dl = l2lenc.decrypt_line
+
         PLAINTXT = "Hello"
-        el = l2lenc.encrypt_line(PLAINTXT)
-
-        print()
-
-        dl = l2lenc.decrypt_line(el)
-
-        self.assertEqual(dl, PLAINTXT)
+        self.assertEqual(dl(el(PLAINTXT)), PLAINTXT)
 
 
 if __name__ == '__main__':

@@ -12,4 +12,6 @@ set my_comsats_user = ""`pass email/comsats/user`""
 set my_comsats_pw = ""`pass email/comsats/password`""
 
 set from=$my_comsats_user
-set smtp_url=smtps://$my_comsats_user:$my_comsats_pw@smtp.office365.com
+set ssl_starttls = yes
+# Use smtp:// instead of smtps:// because office365 uses TLS not SSL immediately
+set smtp_url=smtp://$my_comsats_user:$my_comsats_pw@smtp.office365.com

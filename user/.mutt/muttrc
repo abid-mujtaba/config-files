@@ -13,7 +13,7 @@ folder-hook $folder 'source ~/.mutt/gmail'
 set realname='Abid H. Mujtaba'
 # set sendmail="/usr/bin/ssmtp"
 set use_from = yes
-set ssl_force_tls = yes
+# set ssl_force_tls = yes
 
 set edit_headers=yes
 set editor="/usr/local/bin/vim -c 'set spell spelllang=en'"

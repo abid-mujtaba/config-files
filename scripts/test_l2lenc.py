@@ -22,6 +22,37 @@ class TestPad(unittest.TestCase):
         self.assertEqual(l2lenc.pad("abcd1234defg5678hijk9012lmn"), "abcd1234defg5678hijk9012lmn{{{{{")
 
 
+class TestEncryptionSuite(unittest.TestCase):
+    """
+    Test the creation of the encryption suite.
+    """
+
+    def test_empty_iv(self):
+
+        iv, es = l2lenc.encryption_suite()
+
+        self.assertIsNotNone(iv)
+        self.assertIsNotNone(es)
+
+        self.assertIsInstance(iv, bytes)
+        self.assertEqual(len(iv), l2lenc.BLOCKSIZE)
+
+
+    def test_passed_iv(self):
+
+        IV = bytes("0123456789abcdef", "UTF8")
+
+        iv, es = l2lenc.encryption_suite(IV)
+
+        self.assertIsNotNone(iv)
+        self.assertIsNotNone(es)
+
+        self.assertIsInstance(iv, bytes)
+        self.assertEqual(len(iv), l2lenc.BLOCKSIZE)
+
+        self.assertEqual(iv, IV)
+
+
 if __name__ == '__main__':
 
     unittest.main()

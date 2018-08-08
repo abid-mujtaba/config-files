@@ -95,3 +95,6 @@ bind index,pager \eX vfolder-from-query
 #              "invites" "Gi"
  
 set index_format='4C %S %[%y.%m.%d] %-18.18n %?GU?%GU& ? %?GR?%GR& ? %?GI?%GI& ? %s'
+
+# Set notmuch folder path explicitly
+set nm_default_uri = "notmuch:///home/abid/mail"

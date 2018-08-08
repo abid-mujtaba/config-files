@@ -11,4 +11,9 @@ def get_user(account):
 
 def get_pass(account):
 
+    if account == "gmail":
+        pass_string = "pass email/{}/applicationpassword"
+    else:
+        pass_string = "pass email/{}/password"
+
     return check_output("pass email/{}/password".format(account), shell=True).splitlines()[0]

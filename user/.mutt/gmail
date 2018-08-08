@@ -11,7 +11,7 @@ set trash = "+Trash"
 
 # Get credentials from 'pass' using shell commands
 set my_gmail_user = ""`pass email/gmail/user`""
-set my_gmail_pw = ""`pass email/gmail/applicationpassword`""
+set my_gmail_pw = ""`pass email/gmail/password`""
 
 set from=$my_gmail_user
 set smtp_url=smtps://$my_gmail_user:$my_gmail_pw@smtp.gmail.com

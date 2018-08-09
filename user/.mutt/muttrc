@@ -75,6 +75,10 @@ macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/
 # Unbind 't' for two letter macro
 bind pager t noop
 #
+# Bind 'j' and 'k' in pager to move lines NOT messages
+bind pager j next-line
+bind pager k previous-line
+#
 macro index,pager tc "<sync-mailbox><enter-command>source ~/.mutt/comsats<enter><change-folder>!<enter>"
 #
 macro index,pager tg "<sync-mailbox><enter-command>source ~/.mutt/gmail<enter><change-folder>!<enter>"

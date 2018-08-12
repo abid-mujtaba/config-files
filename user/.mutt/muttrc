@@ -69,6 +69,10 @@ alternative_order text/plain text/html
 # Launch browser when V is pressed
 macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && $BROWSER ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
 
+# Use urlscan to skim for links using Ctrl+B
+macro index,pager \cb	"<pipe-message> urlscan<Enter>"
+macro attach,compose \cb	"<pipe-entry> urlscan<Enter>"
+
 
 # Change accounts
 #

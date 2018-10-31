@@ -17,6 +17,9 @@ localfolders = ~/mail/gmail
 
 [Repository gmail-remote]
 type = Gmail
+# Add explicit tls_level and ssl_version otherwise throwing SSL error for Gmail
+tls_level = tls_secure
+ssl_version = tls1_2 
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 # Use the get_user() function defined in .offlineimap.py to get the user
 remoteusereval = get_user("gmail")

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Turn off PC speaker (get rid of annoying system beep)
+sudo /usr/local/bin/disable-pcspkr
+
 # Set variable in systemd for dunst (notification deamon)
 systemctl --user set-environment DISPLAY=:0
 

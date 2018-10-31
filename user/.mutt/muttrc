@@ -16,7 +16,9 @@ set use_from = yes
 # set ssl_force_tls = yes
 
 set edit_headers=yes
-set editor="/usr/local/bin/vim -c 'set spell spelllang=en'"
+
+# Set editor to vim with specified settings especially no wrapping at 80 characters
+set editor="/usr/bin/nvim -c 'set spell spelllang=en wrap tw=0'"
 
 set alias_file=~/.mutt/aliases
 

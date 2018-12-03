@@ -1,2 +1,5 @@
 .hyper.js:
 	Location: C:\Users\MujtabaAbidHasan\		# Windows Home Folder
+
+	Requires:
+		Inconsolata-g font modified for Powerline

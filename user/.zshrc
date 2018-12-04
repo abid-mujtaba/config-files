@@ -98,6 +98,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Add SSH keys to agent
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/github-personal
+ssh-add ~/.ssh/bbgithub
+
 # Launch tmux by default
 alias tmux="tmux -2 -u"
 if which tmux 2>&1 >/dev/null; then

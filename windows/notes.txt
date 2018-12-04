@@ -1,3 +1,14 @@
+Things to Install:
+
+	- WSL (Ubuntu 18.04)
+	- keepass2
+	- PyCharm 2018 (Professional)
+	- Hyper.js
+	- config files from personal github (vim, zsh, tmux, hyper)
+	- Vundle for Vim plugins
+	- OhMyZsh
+
+	
 .hyper.js:
 	Location: C:\Users\MujtabaAbidHasan\		# Windows Home Folder
 

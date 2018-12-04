@@ -13,7 +13,7 @@ module.exports = {
 
     // font family with optional fallbacks
     // fontFamily: 'Inconsolata g for Powerline', 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
-    fontFamily: '"Inconsolata-g for Powerline Medium", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"Inconsolata-g for Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',

@@ -99,9 +99,14 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Add SSH keys to agent
-eval $(ssh-agent -s)
-ssh-add ~/.ssh/github-personal
-ssh-add ~/.ssh/bbgithub
+if ! [ -f /tmp/ssh-keys-added ]; then
+	
+	eval $(ssh-agent -s)
+	ssh-add ~/.ssh/github-personal
+	ssh-add ~/.ssh/bbgithub
+
+	touch /tmp/ssh-keys-added
+fi
 
 # Launch tmux by default
 alias tmux="tmux -2 -u"

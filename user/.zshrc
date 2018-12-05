@@ -113,3 +113,6 @@ alias tmux="tmux -2 -u"
 if which tmux 2>&1 >/dev/null; then
 	test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
+
+# Add pip --user binary path
+export PATH=$PATH:~/.local/bin

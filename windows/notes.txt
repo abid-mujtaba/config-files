@@ -1,0 +1,64 @@
+Things to Install:
+
+	- WSL (Ubuntu 18.04)
+	- keepass2
+	- PyCharm 2018 (Professional)
+	- Hyper.js
+	- config files from personal github (vim, zsh, tmux, hyper)
+	- Vundle for Vim plugins
+	- OhMyZsh
+	- XMing
+	- Jekyll (in WSL)
+		1. sudo apt-get install ruby-full build-essential
+		2. Create GEM_HOME env var and extend PATH in .zshrc:
+				
+				export GEM_HOME=$HOME/gems
+				export PATH=$PATH:$HOME/gems/bin
+
+		3. Install Jekyll:
+
+				gem install jekyll bundler 
+
+				gem install pkgconfig
+				sudo apt-get install libxslt1-dev
+				gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib//usr/lib/
+				gem install jemoji 
+
+		4. To launch navigate to docs sub-folder in training-materials repo:
+
+				jekyll serve
+
+		5. To enable SSL (for HTTPS):
+
+				# Source: https://www.remotesynthesis.com/blog/running-ssl-localhost
+
+				mkdir ~/.certs
+				cd ~/.certs
+				openssl req -x509 -out localhost.crt -keyout localhost.key \
+					-newkey rsa:2048 -nodes -sha256 \
+					-subj '/CN=localhost' -extensions EXT -config <( \
+					printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+
+				In your docs folder create an 'ssl' sub-folder and symlink the two files there. Then to run Jekyll with SSL issue:
+
+					jekyll serve --ssl-key ssl/localhost.key --ss-cert ssl/localhost.crt
+
+				Chrome will still complain that the website is not secure because it won't recognize the self-signed SSL certificate. To fix this:
+					- Go to chrome settings (chrome://settings)
+					- Click on 'Advanced Settings'
+					- Under HTTPS/SSL click 'Manage Certificate'
+					- Go to 'Trusted Root Certificate Authorities' tab
+					- Click 'Import'
+					- Use the Wizard to import 'localhost.crt'
+					- Scroll down the list and click on the 'localhost' certificate. Click on 'Advanced' and select ALL the checkboxes.
+
+				You MAY have to also add the self-signed certificate to the Windows Certificate Store (Trusted Authority).
+
+					- Follow the instructions in: https://www.thewindowsclub.com/manage-trusted-root-certificates-windows
+
+	
+.hyper.js:
+	Location: C:\Users\MujtabaAbidHasan\		# Windows Home Folder
+
+	Requires:
+		Inconsolata-g font modified for Powerline

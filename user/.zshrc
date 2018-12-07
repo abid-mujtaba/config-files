@@ -131,3 +131,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 
 # Source fzf to make it work in zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Declare gems home folder and add gems bin folder to path
+export GEM_HOME=$HOME/gems
+export PATH=$PATH:$HOME/gems/bin

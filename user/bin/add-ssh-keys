@@ -1,0 +1,4 @@
+# Add SSH keys to agent
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/github-personal
+ssh-add ~/.ssh/bbgithub

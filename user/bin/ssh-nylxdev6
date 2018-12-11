@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# Inline through the gateway to gain access to the nylxdev6 machine
+# Use the Toolkit password
+
+ssh -tt amujtaba4@v5devgateway.bdns.bloomberg.com inline nylxdev6

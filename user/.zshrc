@@ -103,6 +103,9 @@ source $ZSH/oh-my-zsh.sh
 # Turn on noclobber (prevent accidental overwriting of files using redirection)
 set -o noclobber
 
+# Set style of zsh autocompletion suggestions
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
+
 # Add SSH keys to agent
 if ! [ -f /tmp/ssh-keys-added ]; then
 	$HOME/bin/add-ssh-keys

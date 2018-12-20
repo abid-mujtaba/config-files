@@ -10,23 +10,43 @@ Things to Install:
 	- XMing
 	- Jekyll (in WSL)
 		1. sudo apt-get install ruby-full build-essential
-		2. Create GEM_HOME env var and extend PATH in .zshrc:
+		2. Install LiveReload for Windows (livereload.com)
+		3. Create GEM_HOME env var and extend PATH in .zshrc:
 				
 				export GEM_HOME=$HOME/gems
 				export PATH=$PATH:$HOME/gems/bin
 
-		3. Install Jekyll:
+		4. Install Jekyll inside a bundle virtual env:
 
-				gem install jekyll bundler 
+				gem install bundler
 
-				gem install pkgconfig
-				sudo apt-get install libxslt1-dev
-				gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib//usr/lib/
-				gem install jemoji 
+				Navigate to docs folder of repo from which you will launch jekyll to serve content.
+
+				bundle init
+				mkdir -p vendor/bundle		# Install gems in this location (to avoid conflicts with system gems)
+				bundle install --path vendor/bundle
+				bundle add jekyll
+
+				Edit ./Gemfile and add:
+
+					gem "jemoji"
+
+					group :jekyll_plugins do
+						gem 'hawkins'
+					end
+
+				bundle install 		# to add jemoji and hawkins (might require 'bundle install hawkins')
+
+				The following might be needed:
+
+					gem install pkgconfig
+					sudo apt-get install libxslt1-dev
+					gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib//usr/lib/
+					gem install jemoji 
 
 		4. To launch navigate to docs sub-folder in training-materials repo:
 
-				jekyll serve
+				bundle exec jekyll serve
 
 		5. To enable SSL (for HTTPS):
 
@@ -41,7 +61,11 @@ Things to Install:
 
 				In your docs folder create an 'ssl' sub-folder and symlink the two files there. Then to run Jekyll with SSL issue:
 
-					jekyll serve --ssl-key ssl/localhost.key --ss-cert ssl/localhost.crt
+					bundle exec jekyll serve --ssl-key ssl/localhost.key --ss-cert ssl/localhost.crt
+
+				To use multiple config files with the latter overriding the former add:
+
+					--config _config.yml,_config.dev.yml
 
 				Chrome will still complain that the website is not secure because it won't recognize the self-signed SSL certificate. To fix this:
 					- Go to chrome settings (chrome://settings)

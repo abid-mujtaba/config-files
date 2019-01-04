@@ -142,3 +142,6 @@ bindkey -M viins 'jk' vi-cmd-mode
 # Declare gems home folder and add gems bin folder to path
 export GEM_HOME=$HOME/gems
 export PATH=$PATH:$HOME/gems/bin
+
+# In vi-mode use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
+bindkey -M viins '^F' forward-char

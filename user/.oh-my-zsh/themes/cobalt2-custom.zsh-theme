@@ -9,6 +9,13 @@
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
+# Function for adding vi mode status to prompt
+function _vi_status() {
+  if {echo $fpath | grep -q "plugins/vi-mode"}; then
+    echo "$(vi_mode_prompt_info)"
+  fi
+}
+
 CURRENT_BG='NONE'
 SEGMENT_SEPARATOR=''
 
@@ -106,4 +113,4 @@ build_prompt() {
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
 # Empty out the right prompt removing the annoying timestampe
-RPROMPT=''
+RPROMPT='$(_vi_status)'

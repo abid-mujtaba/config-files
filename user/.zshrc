@@ -64,7 +64,7 @@ ZSH_THEME="cobalt2-custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git shrink-path
+	vi-mode git shrink-path zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,21 +98,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Add SSH keys to agent
-if ! [ -f /tmp/ssh-keys-added ]; then
-	
-	eval $(ssh-agent -s)
-	ssh-add ~/.ssh/github-personal
-	ssh-add ~/.ssh/bbgithub
-
-	touch /tmp/ssh-keys-added
-fi
+# Set style of zsh autocompletion suggestions
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
 # Launch tmux by default
-alias tmux="tmux -2 -u"
-if which tmux 2>&1 >/dev/null; then
-	test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
+# alias tmux="tmux -2 -u"
+# if which tmux 2>&1 >/dev/null; then
+# 	test -z "$TMUX" && (tmux attach || tmux new-session)
+# fi
 
 # Add pip --user binary path
 export PATH=$PATH:~/.local/bin
+
+# In vi-mode use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
+bindkey -M viins '^F' forward-char

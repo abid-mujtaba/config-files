@@ -143,5 +143,10 @@ bindkey -M viins 'jk' vi-cmd-mode
 export GEM_HOME=$HOME/gems
 export PATH=$PATH:$HOME/gems/bin
 
+# Set DISPLAY for X applications. Remember to run XMing in Windows before-hand.
+export DISPLAY=localhost:0.0
+
 # In vi-mode use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
 bindkey -M viins '^F' forward-char
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

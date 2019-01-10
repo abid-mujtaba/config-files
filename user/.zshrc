@@ -112,3 +112,5 @@ export PATH=$PATH:~/.local/bin
 
 # In vi-mode use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
 bindkey -M viins '^F' forward-char
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

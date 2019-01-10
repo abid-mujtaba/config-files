@@ -146,7 +146,11 @@ export PATH=$PATH:$HOME/gems/bin
 # Set DISPLAY for X applications. Remember to run XMing in Windows before-hand.
 export DISPLAY=localhost:0.0
 
-# In vi-mode use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
+# vi-mode configuration:
+# Use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
 bindkey -M viins '^F' forward-char
+# Use 'jk' as the escape sequence
+bindkey -M viins 'jk' vi-cmd-mode
 
+# Source fzf to make it work in zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

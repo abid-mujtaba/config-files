@@ -66,6 +66,7 @@ ZSH_THEME="cobalt2-custom"
 plugins=(
 	vi-mode git shrink-path zsh-autosuggestions
 )
+# Note: zsh-autosuggestions must be installed/cloned in to ~/.oh-my-zsh/custom/plugins/
 
 source $ZSH/oh-my-zsh.sh
 

@@ -54,20 +54,20 @@ Things to Install:
 
 				mkdir ~/.certs
 				cd ~/.certs
-				openssl req -x509 -out localhost.crt -keyout localhost.key \
+				openssl req -x509 -days 365 -out localhost.crt -keyout localhost.key \
 					-newkey rsa:2048 -nodes -sha256 \
 					-subj '/CN=localhost' -extensions EXT -config <( \
 					printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
 				In your docs folder create an 'ssl' sub-folder and symlink the two files there. Then to run Jekyll with SSL issue:
 
-					bundle exec jekyll serve --ssl-key ssl/localhost.key --ss-cert ssl/localhost.crt
+					bundle exec jekyll serve --ssl-key ssl/localhost.key --ssl-cert ssl/localhost.crt
 
 				To use multiple config files with the latter overriding the former add:
 
 					--config _config.yml,_config.dev.yml
 
-				Chrome will still complain that the website is not secure because it won't recognize the self-signed SSL certificate. To fix this:
+				Chrome will still complain that the website is not secure because it won't recognize the self-signed SSL certificate. To fix this first add the certificate to the Windows Certificate Store (described below) before attempting the following::
 					- Go to chrome settings (chrome://settings)
 					- Click on 'Advanced Settings'
 					- Under HTTPS/SSL click 'Manage Certificate'

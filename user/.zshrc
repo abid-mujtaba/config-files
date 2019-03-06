@@ -103,6 +103,9 @@ source $ZSH/oh-my-zsh.sh
 # Turn on noclobber (prevent accidental overwriting of files using redirection)
 set -o noclobber
 
+# Tell zsh nto to nice background processes (fails in WSL)
+unsetopt BG_NICE
+
 # Set style of zsh autocompletion suggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
@@ -145,6 +148,12 @@ export PATH=$PATH:$HOME/gems/bin
 
 # Set DISPLAY for X applications. Remember to run XMing in Windows before-hand.
 export DISPLAY=localhost:0.0
+
+# Set Docker Host
+export DOCKER_HOST=tcp://0.0.0.0:2375
+
+# Set work folder with full windows path (for mounting volumes to docker)
+export work=/c/Users/MujtabaAbidHasan/work
 
 # vi-mode configuration:
 # Use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion

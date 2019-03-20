@@ -99,6 +99,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Turn on noclobber (prevent accidental overwriting of files using redirection)
+set -o noclobber
+
 # Set style of zsh autocompletion suggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 

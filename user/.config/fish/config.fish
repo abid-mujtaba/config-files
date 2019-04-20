@@ -20,3 +20,7 @@ set -g _JAVA_AWT_WM_NONREPARENTING 1
 
 # Set Window Manager Name to LG3D for same reason as above
 # wmname LG3D
+
+# Use ripgrep with fzf
+export FZF_DEFAULT_COMMAND='rg --files --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

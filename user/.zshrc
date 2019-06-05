@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/bin:$PATH
+export PATH=/opt/bb/bin:$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/abid/.oh-my-zsh"
@@ -112,6 +112,8 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 # Add SSH keys to agent
 if ! [ -f /tmp/ssh-keys-added ]; then
 	$HOME/bin/add-ssh-keys
+	touch /tmp/ssh-keys-added
+fi
 
 # Set style of zsh autocompletion suggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
@@ -155,11 +157,5 @@ export DOCKER_HOST=tcp://0.0.0.0:2375
 # Set work folder with full windows path (for mounting volumes to docker)
 export work=/c/Users/MujtabaAbidHasan/work
 
-# vi-mode configuration:
-# Use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
-bindkey -M viins '^F' forward-char
-# Use 'jk' as the escape sequence
-bindkey -M viins 'jk' vi-cmd-mode
-
-# Source fzf to make it work in zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Do not use proxy for the DPKG API
+export no_proxy=$no_proxy,blp-dpkg.dev.bloomberg.com

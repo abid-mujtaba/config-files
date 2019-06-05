@@ -1,5 +1,6 @@
 Things to Install:
 
+	- Run bbvpn bootstrapper
 	- WSL (Ubuntu 18.04)
 	- keepass2
 	- PyCharm 2018 (Professional)

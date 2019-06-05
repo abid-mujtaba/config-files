@@ -8,6 +8,13 @@ Things to Install:
 	- Vundle for Vim plugins
 	- OhMyZsh
 	- XMing
+	- Bloomberg DPKG
+		1. http://tutti.prod.bloomberg.com/dpkg/tutorials/configuring_a_development_machine
+			- Remember to replace --no-proxy in the perl command as recommended for Dev
+			- Also add /opt/bb/bin to the sudo path (visudo) so that Bloomberg's version of apt-get is used to install packages
+		2. Now you can use 'sudo apt-get install' for Bloomberg DPKGs e.g. python3.7-comdb2
+		3. To use cdb2sql or python3.7-combdb2 to talk to comdb2 database on dev:
+			- Populate cdb2cfg.cfg based on the docker config in: https://bbgithub.dev.bloomberg.com/bbvpn/docs/blob/master/development/docker.md#talking-to-comdb2-in-dev-from-docker
 	- Jekyll (in WSL)
 		1. sudo apt-get install ruby-full build-essential
 		2. Install LiveReload for Windows (livereload.com)

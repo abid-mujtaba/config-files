@@ -18,6 +18,6 @@ user:
 		echo ln -sf $(SRC)/user/.mutt/$$f ~/.mutt/; \
 		ln -sf $(SRC)/user/.mutt/$$f ~/.mutt/; \
 	done
-	
+
 
 .PHONY: user root

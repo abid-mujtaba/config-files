@@ -106,6 +106,14 @@ set -o noclobber
 # Set style of zsh autocompletion suggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
+# Add additional git aliases
+alias gdc="git diff --cached"
+alias grc="git rebase --continue"
+alias grs="git rebase --skip"
+
+# Make rg always color its output
+alias rg="rg --color=always"
+
 # Launch tmux by default
 # alias tmux="tmux -2 -u"
 # if which tmux 2>&1 >/dev/null; then

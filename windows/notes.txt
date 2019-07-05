@@ -2,6 +2,11 @@ Things to Install:
 
 	- Run bbvpn bootstrapper
 	- WSL (Ubuntu 18.04)
+	- wsltty
+		- To get copy-paste to work in tmux:
+			- Create the %LOCALAPPDATA%/wsltty/home/%USERNAME%/.minttrc file and add: `AllowSetSelection=true` following which selecting text using the mouse will allow pasting in Windows (e.g. Chrome)
+			- %USERNAME% should be the windows username
+			- %LOCALAPPDATA% should be C:\Users\%USERNAME%\AppData\Local
 	- keepass2
 	- PyCharm 2018 (Professional)
 	- Hyper.js

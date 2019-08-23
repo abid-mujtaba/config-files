@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/opt/bb/bin:$HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/abid/.oh-my-zsh"
@@ -155,7 +154,29 @@ export DISPLAY=localhost:0.0
 export DOCKER_HOST=tcp://0.0.0.0:2375
 
 # Set work folder with full windows path (for mounting volumes to docker)
+export whome=/c/Users/MujtabaAbidHasan
 export work=/c/Users/MujtabaAbidHasan/work
+export workspace=/c/Users/MujtabaAbidHasan/work/workspace
 
 # Do not use proxy for the DPKG API
 export no_proxy=$no_proxy,blp-dpkg.dev.bloomberg.com
+
+
+# Use fzf to browse Chrome History and launch page
+# Requires a symbolic link 'windows-chrome' that points to the Chrome browser in Windows
+# Source: https://junegunn.kr/2015/04/browsing-chrome-history-with-fzf/
+ch() {
+	local cols seps
+	cols=$(( COLUMNS / 3 ))
+	sep='{::}'
+
+	cp -f /c/Users/MujtabaAbidHasan/AppData/Local/Google/Chrome/User\ Data/Default/History /tmp/History
+
+	sqlite3 -separator $sep /tmp/History \
+		"SELECT substr(title, 1, $cols), url
+	     FROM urls ORDER BY last_visit_time DESC" |
+	awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+	fzf --ansi --multi --no-sort |
+	sed 's#.*\(https*://\)#\1#' |
+	xargs windows-chrome
+}

@@ -1,16 +1,16 @@
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */home/abid/.fzf/bin* ]]; then
-  export PATH="$PATH:/home/abid/.fzf/bin"
+  export PATH="$PATH:$HOME/.fzf/bin"
 fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/home/abid/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "/home/abid/.fzf/shell/key-bindings.zsh"
+source "$HOME/.fzf/shell/key-bindings.zsh"
 
 # Switch to using rg (repgrep)
 # Use full path so that we avoid the alias which has --color=always

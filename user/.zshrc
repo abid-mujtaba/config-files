@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$PATH
+export PATH=/usr/local/bin:$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/abid/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -64,7 +64,7 @@ ZSH_THEME="cobalt2-custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	vi-mode git shrink-path zsh-autosuggestions
+	vi-mode git shrink-path zsh-autosuggestions docker docker-compose autojump zsh-syntax-highlighting
 )
 # Note: zsh-autosuggestions must be installed/cloned in to ~/.oh-my-zsh/custom/plugins/
 
@@ -117,6 +117,11 @@ fi
 # Set style of zsh autocompletion suggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
+# Additional config
+DISABLE_MAGIC_FUNCTIONS=true
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+# DISABLE_UNTRACKED_FILES_DIRTY=true
+
 # Add additional git aliases
 alias gdc="git diff --cached"
 alias grc="git rebase --continue"
@@ -126,13 +131,13 @@ alias grs="git rebase --skip"
 alias rg="rg --color=always"
 
 # Launch tmux by default
-# alias tmux="tmux -2 -u"
-# if which tmux 2>&1 >/dev/null; then
-# 	test -z "$TMUX" && (tmux attach || tmux new-session)
-# fi
+alias tmux="tmux -2 -u"
+if which tmux 2>&1 >/dev/null; then
+	test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
 
 # Add pip --user binary path
-export PATH=$PATH:~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
 
 # vi-mode configuration:
 # Use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion
@@ -164,6 +169,7 @@ export no_proxy=$no_proxy,blp-dpkg.dev.bloomberg.com
 
 # Use fzf to browse Chrome History and launch page
 # Requires a symbolic link 'windows-chrome' that points to the Chrome browser in Windows
+# We filter out urls with length greater than 100 (these tend to be of limited utility)
 # Source: https://junegunn.kr/2015/04/browsing-chrome-history-with-fzf/
 ch() {
 	local cols seps
@@ -173,10 +179,16 @@ ch() {
 	cp -f /c/Users/MujtabaAbidHasan/AppData/Local/Google/Chrome/User\ Data/Default/History /tmp/History
 
 	sqlite3 -separator $sep /tmp/History \
-		"SELECT substr(title, 1, $cols), url
-	     FROM urls ORDER BY last_visit_time DESC" |
+		"SELECT substr(title, 1, $cols), url FROM urls
+		WHERE LENGTH(url) < 100 ORDER BY last_visit_time DESC" |
 	awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
 	fzf --ansi --multi --no-sort |
 	sed 's#.*\(https*://\)#\1#' |
 	xargs windows-chrome
+}
+
+
+# Search for item in Google in Chrome
+cg() {
+	windows-chrome "https://www.google.com/search?q=$(echo $@ | tr -s ' ' '+')"
 }

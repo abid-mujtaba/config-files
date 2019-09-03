@@ -3,7 +3,7 @@
 export PATH=$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/abid/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -115,13 +115,13 @@ alias grs="git rebase --skip"
 alias rg="rg --color=always"
 
 # Launch tmux by default
-# alias tmux="tmux -2 -u"
-# if which tmux 2>&1 >/dev/null; then
-# 	test -z "$TMUX" && (tmux attach || tmux new-session)
-# fi
+alias tmux="tmux -2 -u"
+if which tmux 2>&1 >/dev/null; then
+	test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
 
 # Add pip --user binary path
-export PATH=$PATH:~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
 
 # vi-mode configuration:
 # Use Ctrl+F for auto-completion by mapping it to 'forward-char' which is already setup for auto-completion

@@ -1,113 +1,31 @@
 Things to Install:
 
-	- Run bbvpn bootstrapper
-	- WSL (Ubuntu 18.04)
-	- wsltty
-		- To get copy-paste to work in tmux:
-			- Create the %LOCALAPPDATA%/wsltty/home/%USERNAME%/.minttrc file and add: `AllowSetSelection=true` following which selecting text using the mouse will allow pasting in Windows (e.g. Chrome)
-			- %USERNAME% should be the windows username
-			- %LOCALAPPDATA% should be C:\Users\%USERNAME%\AppData\Local
-		- To use emoji in the terminal
-			- Download https://github.com/iamcal/emoji-data/archive/v4.0.3.zip
-			- Extract folder img-google-64 into /c/Users/MujtabaAbidHasan/AppData/Roaming/wsltty/emojis
-			- Rename folder to 'google' (remove hyphens)
-			- Add the following two lines to /c/Users/MujtabaAbidHasan/AppData/Roaming/wsltty/config:
-				```
-				Charwidth=unicode
-				Emojis=google
-				```
-	- keepass2
-	- PyCharm 2018 (Professional)
-	- config files from personal github (vim, zsh, tmux, hyper)
-	- Vundle for Vim plugins
-	- OhMyZsh
-	- XMing
-	- To use https protocol with native github:
-		- Use https protocol to clone the repos
-		- Configure git to use the windows credential.helper: https://www.edwardthomson.com/blog/git_credential_manager_with_windows_subsystem_for_linux.html
-		- Set up a Personal Authentication Token in Github to use with the credential helper
-	- Bloomberg DPKG
-		1. http://tutti.prod.bloomberg.com/dpkg/tutorials/configuring_a_development_machine
-			- Remember to replace --no-proxy in the perl command as recommended for Dev
-			- Also add /opt/bb/bin to the sudo path (visudo) so that Bloomberg's version of apt-get is used to install packages
-		2. Now you can use 'sudo apt-get install' for Bloomberg DPKGs e.g. python3.7-comdb2
-		3. To use cdb2sql or python3.7-combdb2 to talk to comdb2 database on dev:
-			- Populate cdb2cfg.cfg based on the docker config in: https://bbgithub.dev.bloomberg.com/bbvpn/docs/blob/master/development/docker.md#talking-to-comdb2-in-dev-from-docker
-	- Jekyll (in WSL)
-		1. sudo apt-get install ruby-full build-essential
-		2. Install LiveReload for Windows (livereload.com)
-		3. Create GEM_HOME env var and extend PATH in .zshrc:
-
-				export GEM_HOME=$HOME/gems
-				export PATH=$PATH:$HOME/gems/bin
-
-		4. Install Jekyll inside a bundle virtual env:
-
-				gem install bundler
-
-				Navigate to docs folder of repo from which you will launch jekyll to serve content.
-
-				bundle init
-				mkdir -p vendor/bundle		# Install gems in this location (to avoid conflicts with system gems)
-				bundle install --path vendor/bundle
-				bundle add jekyll
-
-				Edit ./Gemfile and add:
-
-					gem "jemoji"
-
-					group :jekyll_plugins do
-						gem 'hawkins'
-					end
-
-				bundle install 		# to add jemoji and hawkins (might require 'bundle install hawkins')
-
-				The following might be needed:
-
-					gem install pkgconfig
-					sudo apt-get install libxslt1-dev
-					gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib//usr/lib/
-					gem install jemoji 
-
-		4. To launch navigate to docs sub-folder in training-materials repo:
-
-				bundle exec jekyll serve
-
-		5. To enable SSL (for HTTPS):
-
-				# Source: https://www.remotesynthesis.com/blog/running-ssl-localhost
-
-				mkdir ~/.certs
-				cd ~/.certs
-				openssl req -x509 -days 365 -out localhost.crt -keyout localhost.key \
-					-newkey rsa:2048 -nodes -sha256 \
-					-subj '/CN=localhost' -extensions EXT -config <( \
-					printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
-
-				In your docs folder create an 'ssl' sub-folder and symlink the two files there. Then to run Jekyll with SSL issue:
-
-					bundle exec jekyll serve --ssl-key ssl/localhost.key --ssl-cert ssl/localhost.crt
-
-				To use multiple config files with the latter overriding the former add:
-
-					--config _config.yml,_config.dev.yml
-
-				Chrome will still complain that the website is not secure because it won't recognize the self-signed SSL certificate. To fix this first add the certificate to the Windows Certificate Store (described below) before attempting the following::
-					- Go to chrome settings (chrome://settings)
-					- Click on 'Advanced Settings'
-					- Under HTTPS/SSL click 'Manage Certificate'
-					- Go to 'Trusted Root Certificate Authorities' tab
-					- Click 'Import'
-					- Use the Wizard to import 'localhost.crt'
-					- Scroll down the list and click on the 'localhost' certificate. Click on 'Advanced' and select ALL the checkboxes.
-
-				You MAY have to also add the self-signed certificate to the Windows Certificate Store (Trusted Authority).
-
-					- Follow the instructions in: https://www.thewindowsclub.com/manage-trusted-root-certificates-windows
-
-	
-.hyper.js:
-	Location: C:\Users\MujtabaAbidHasan\		# Windows Home Folder
-
-	Requires:
-		Inconsolata-g font modified for Powerline
+- Run bbvpn bootstrapper
+- WSL (Ubuntu 18.04)
+- wsltty
+	- To get copy-paste to work in tmux:
+		- Create the %LOCALAPPDATA%/wsltty/home/%USERNAME%/.minttrc file and add: `AllowSetSelection=true` following which selecting text using the mouse will allow pasting in Windows (e.g. Chrome)
+		- %USERNAME% should be the windows username
+		- %LOCALAPPDATA% should be C:\Users\%USERNAME%\AppData\Local
+	- To use emoji in the terminal
+		- Download https://github.com/iamcal/emoji-data/archive/v4.0.3.zip
+		- Extract folder img-google-64 into /c/Users/MujtabaAbidHasan/AppData/Roaming/wsltty/emojis
+		- Rename folder to 'google' (remove hyphens)
+		- Add the following two lines to /c/Users/MujtabaAbidHasan/AppData/Roaming/wsltty/config:
+			```
+			Charwidth=unicode
+			Emojis=google
+			```
+- keepass2
+- config files from personal github (vim, zsh, tmux, hyper)
+- Vundle for Vim plugins
+- OhMyZsh
+- XMing
+- Set up Github and BBGithub: http://tutti.prod.bloomberg.com/go-git-go-docs/configuration
+- Bloomberg DPKG (best to avoid)
+	1. http://tutti.prod.bloomberg.com/dpkg/tutorials/configuring_a_development_machine
+		- Remember to replace --no-proxy in the perl command as recommended for Dev
+		- Also add /opt/bb/bin to the sudo path (visudo) so that Bloomberg's version of apt-get is used to install packages
+	2. Now you can use 'sudo apt-get install' for Bloomberg DPKGs e.g. python3.7-comdb2
+	3. To use cdb2sql or python3.7-combdb2 to talk to comdb2 database on dev:
+		- Populate cdb2cfg.cfg based on the docker config in: https://bbgithub.dev.bloomberg.com/bbvpn/docs/blob/master/development/docker.md#talking-to-comdb2-in-dev-from-docker

@@ -1,0 +1,16 @@
+# Settings for the readline library
+# Enable vi-mode editing in the python REPL
+
+set bell-style none
+
+set editing-mode vi
+set keymap vi
+
+$if mode=vi
+	set keymap vi-command
+	"gg": beginning-of-history
+	"G": end-of-history
+
+	set keymap vi-insert
+	"jk": vi-movement-mode
+$endif

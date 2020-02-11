@@ -1,0 +1,141 @@
+{
+    "editor.cursorStyle": "block",
+    "editor.wordWrapColumn": 99,
+    "vim.easymotion": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "leader",
+                "w"
+            ],
+            "after": [
+                "leader",
+                "leader",
+                "w"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "e"
+            ],
+            "after": [
+                "leader",
+                "leader",
+                "e"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "b"
+            ],
+            "after": [
+                "leader",
+                "leader",
+                "b"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "f"
+            ],
+            "after": [
+                "leader",
+                "leader",
+                "f"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "q"
+            ],
+            "commands": [
+                "rewrap.rewrapComment"
+            ]
+        },
+        {
+            "before": [
+                "<C-h>"
+            ],
+            "after": [
+                "<C-w>",
+                "h"
+            ]
+        },
+        {
+            "before": [
+                "<C-j>"
+            ],
+            "after": [
+                "<C-w>",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "<C-k>"
+            ],
+            "after": [
+                "<C-w>",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "<C-l>"
+            ],
+            "after": [
+                "<C-w>",
+                "l"
+            ]
+        }
+    ],
+    "vim.leader": ",",
+    "vim.useSystemClipboard": true,
+    "vim.statusBarColorControl": true,
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.camelCaseMotion.enable": true,
+    "vim.searchHighlightColor": "#ff7b00a1",
+    "vim.useCtrlKeys": true,
+    "vim.foldfix": true,
+    "editor.fontFamily": "'Inconsolata-g', Consolas, 'Courier New', monospace",
+    "editor.lineNumbers": "relative",
+    "window.zoomLevel": 0,
+    "explorer.confirmDelete": false,
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe",
+    "git.ignoreMissingGitWarning": true,
+    "extensions.ignoreRecommendations": false,
+    "editor.renderFinalNewline": false,
+    "editor.rulers": [
+        88
+    ],
+    "http.proxy": "http://proxy.bloomberg.com:81",
+    "http.proxyStrictSSL": false,
+    "terminal.integrated.fontFamily": "'Inconsolata-g for Powerline'",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+    "telemetry.enableTelemetry": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "terminal.integrated.shell.linux": "/bin/bash",
+}

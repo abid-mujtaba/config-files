@@ -3,8 +3,22 @@ Things to Install:
 - Run bbvpn bootstrapper
 - WSL (Ubuntu 18.04)
 - keepass2
-- config files from personal github (vim, zsh, tmux, hyper)
+- config files from personal github (vim, zsh, tmux)
+	- Install oh-my-zsh and powerlevel10k using: https://medium.com/appstud/web-development-setup-on-windows-wsl-ubuntu-windows-terminal-oh-my-zsh-powerlevel10k-efcfc9a1c260
+- Install patched Source Code Pro fonts (named SauceCodePro) with weight semi-bold from:
+	https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Semibold/complete/Sauce%20Code%20Pro%20Semibold%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
 - Vundle for Vim plugins
 - OhMyZsh
 - XMing
 - Set up Github and BBGithub: http://tutti.prod.bloomberg.com/go-git-go-docs/configuration
+- Windows Terminal Preview
+	- Install from Microsoft Store
+	- Edit settings json file
+		1. Change defaultProfile to be Ubuntu 18.04 (WSL)
+		2. Add the following to the Ubuntu 18.04 (WSL) profile object:
+
+			"startingDirectory": "//wsl$/Ubuntu-18.04/home/abid/",
+			"cursorShape": "filledBox",
+			"cursorColor": "#bbbbbb",
+			"fontFace": "SauceCodePro NF",
+			"fontWeight": "semi-bold"

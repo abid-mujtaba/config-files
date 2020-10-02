@@ -1,15 +1,26 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
-export PATH=/usr/local/bin:$HOME/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+# Set default browser to wslview so that URLs are opened on the Windows side
+export BROWSER="wslview"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="cobalt2-custom"
+# ZSH_THEME="cobalt2-custom"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -64,8 +75,11 @@ ZSH_THEME="cobalt2-custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	vi-mode git shrink-path zsh-autosuggestions docker docker-compose autojump zsh-syntax-highlighting
+	vi-mode git shrink-path zsh-autosuggestions docker docker-compose autojump zsh-syntax-highlighting zsh-z
 )
+# plugins=(
+# 	vi-mode git shrink-path docker docker-compose autojump zsh-syntax-highlighting zsh-z
+# )
 # Note: zsh-autosuggestions must be installed/cloned in to ~/.oh-my-zsh/custom/plugins/
 
 source $ZSH/oh-my-zsh.sh
@@ -83,6 +97,9 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+
+# Set vim as the default editor
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -127,14 +144,24 @@ alias gdc="git diff --cached"
 alias grc="git rebase --continue"
 alias grs="git rebase --skip"
 
+# Create aliases for jumping up several folders
+alias .1="cd .."
+alias .2="cd ../.."
+alias .3="cd ../../.."
+alias .4="cd ../../../.."
+
 # Make rg always color its output
 alias rg="rg --color=always"
 
-# Launch tmux by default
-alias tmux="tmux -2 -u"
-if which tmux 2>&1 >/dev/null; then
-	test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
+# Use e to launch emacsclient inside the terminal
+alias e="emacsclient -t"
+
+# Use dc instead of docker-compose
+alias dc="docker-compose"
+
+# Use bgo to open the current repo in Chrome
+alias bgo="gh repo view -w"
+
 
 # Add pip --user binary path
 export PATH="$HOME/.local/bin:$PATH"
@@ -156,12 +183,15 @@ export PATH=$PATH:$HOME/gems/bin
 export DISPLAY=localhost:0.0
 
 # Set Docker Host
-export DOCKER_HOST=tcp://0.0.0.0:2375
+# export DOCKER_HOST=tcp://0.0.0.0:2375
+export DOCKER_HOST=tcp://localhost:2375
 
 # Set work folder with full windows path (for mounting volumes to docker)
 export whome=/c/Users/MujtabaAbidHasan
 export work=/c/Users/MujtabaAbidHasan/work
 export workspace=/c/Users/MujtabaAbidHasan/work/workspace
+# Set windows root folder to be used by docker scripts
+export DOCKER_ROOT=$work
 
 # Do not use proxy for the DPKG API
 export no_proxy=$no_proxy,blp-dpkg.dev.bloomberg.com
@@ -192,3 +222,29 @@ ch() {
 cg() {
 	windows-chrome "https://www.google.com/search?q=$(echo $@ | tr -s ' ' '+')"
 }
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Set umask to 022
+[[ "$(umask)" = "000" ]] && umask 0022
+
+# Don't put duplicate command-lines in history
+# If a command starts with space don't add it to history
+HISTCONTROL=ignoredups:ignorespace
+
+# Ignore duplicates when looking through history
+setopt HIST_IGNORE_ALL_DUPS
+
+# Timestamp for command history
+HISTTIMEFORMAT="%F %T"
+
+# Magic space expands !! and !-{n} when you hit spacebar after. You can also do
+# {cmd-frag}!<space> to expand the last command that started with that fragment
+bindkey " " magic-space
+
+# Launch tmux by default
+alias tmux="tmux -2 -u"
+if which tmux 2>&1 >/dev/null; then
+	test -z "$TMUX" && (tmux attach 2> /dev/null || tmux new-session)
+fi

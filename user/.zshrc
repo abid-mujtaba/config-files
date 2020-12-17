@@ -75,11 +75,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	vi-mode git shrink-path zsh-autosuggestions docker docker-compose autojump zsh-syntax-highlighting zsh-z
+	autojump docker docker-compose git shrink-path vi-mode zsh-autosuggestions zsh-easy-motion zsh-syntax-highlighting zsh-z
 )
-# plugins=(
-# 	vi-mode git shrink-path docker docker-compose autojump zsh-syntax-highlighting zsh-z
-# )
 # Note: zsh-autosuggestions must be installed/cloned in to ~/.oh-my-zsh/custom/plugins/
 
 source $ZSH/oh-my-zsh.sh
@@ -244,6 +241,9 @@ HISTTIMEFORMAT="%F %T"
 # Magic space expands !! and !-{n} when you hit spacebar after. You can also do
 # {cmd-frag}!<space> to expand the last command that started with that fragment
 bindkey " " magic-space
+
+# Use , as the leader key for easymotion
+bindkey -M vicmd ',' vi-easy-motion
 
 # Launch tmux by default
 alias tmux="tmux -2 -u"

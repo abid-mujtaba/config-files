@@ -140,6 +140,8 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 # DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # Add additional git aliases
+alias gru="git remote update"
+alias gco="git checkout"
 alias gdc="git diff --cached"
 alias grc="git rebase --continue"
 alias grs="git rebase --skip"
@@ -180,11 +182,11 @@ export GEM_HOME=$HOME/gems
 export PATH=$PATH:$HOME/gems/bin
 
 # Set DISPLAY for X applications. Remember to run XMing in Windows before-hand.
-export DISPLAY=localhost:0.0
+export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
 
 # Set Docker Host
 # export DOCKER_HOST=tcp://0.0.0.0:2375
-export DOCKER_HOST=tcp://localhost:2375
+# export DOCKER_HOST=tcp://localhost:2375
 
 # Set work folder with full windows path (for mounting volumes to docker)
 export whome=/c/Users/MujtabaAbidHasan
@@ -248,3 +250,18 @@ alias tmux="tmux -2 -u"
 if which tmux 2>&1 >/dev/null; then
 	test -z "$TMUX" && (tmux attach 2> /dev/null || tmux new-session)
 fi
+
+# Setup entry in Windows /etc/hosts to allow Chrome to talk to WSL2 servers
+# First copy to /tmp, then delete any existing entries, copy back and append
+HOSTS_FILE="/mnt/c/Windows/System32/drivers/etc/hosts"
+TMP_FOLDER=$(mktemp -d)
+
+cp "${HOSTS_FILE}" "${TMP_FOLDER}/hosts"
+sed '/wsl2/d' -i "${TMP_FOLDER}/hosts"
+cp "${TMP_FOLDER}/hosts" "${HOSTS_FILE}"
+
+echo "$(hostname -I) wsl2" >> "${HOSTS_FILE}"
+
+unset HOSTS_FILE
+unset TMP_FOLDER
+

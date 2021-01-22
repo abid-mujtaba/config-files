@@ -18,6 +18,9 @@
 ;; Enable evil-collection (evil bindings in all states)
 (evil-collection-init)
 
+;; Enable evil-easymotion and set `,` as the leader key
+(evilem-default-keybindings ",")
+
 ;; Let w move to any line (not just the current line)
 ;; Source: https://github.com/PythonNut/evil-easymotion/issues/50
 ;; (evilem-make-motion evilem-motion-forward-word-begin #'evil-forward-word-begin)
@@ -55,6 +58,8 @@
 ;; Run black when saving buffer
 (add-hook 'elpy-mode-hook 'python-black-on-save-mode)
 
+;; Enable mouse
+(xterm-mouse-mode)
 
 (require 'magit)
 (require 'git-gutter)

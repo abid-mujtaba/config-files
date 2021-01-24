@@ -93,6 +93,15 @@
 ;; Enable mouse
 (xterm-mouse-mode)
 
+;; Use only spaces (no tabs at all)
+(setq-default indent-tabs-mode nil)
+
+;; Show column numbers
+(setq-default column-number-mode t)
+
+;; Disable menu bar
+(setq-default menu-bar-mode nil)
+
 ;; Uncomment to make easymotion cross lines for w, b, etc.
 ;;
 ;; (put 'visible-buffer 'bounds-of-thing-at-point (lambda () (cons (window-start) (window-end))))

@@ -18,9 +18,6 @@
 ;; Enable evil-collection (evil bindings in all states)
 (evil-collection-init)
 
-;; Enable evil-easymotion and set `,` as the leader key
-(evilem-default-keybindings ",")
-
 ;; Let w move to any line (not just the current line)
 ;; Source: https://github.com/PythonNut/evil-easymotion/issues/50
 ;; (evilem-make-motion evilem-motion-forward-word-begin #'evil-forward-word-begin)
@@ -58,8 +55,6 @@
 ;; Run black when saving buffer
 (add-hook 'elpy-mode-hook 'python-black-on-save-mode)
 
-;; Enable mouse
-(xterm-mouse-mode)
 
 (require 'magit)
 (require 'git-gutter)
@@ -78,3 +73,30 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
+
+;; Define , to be the easymotion leader key
+(evilem-default-keybindings ",")
+
+;; Enable mouse
+(xterm-mouse-mode)
+
+;; Uncomment to make easymotion cross lines for w, b, etc.
+;;
+;; (put 'visible-buffer 'bounds-of-thing-at-point (lambda () (cons (window-start) (window-end))))
+;; (evilem-make-motion evilem-motion-forward-word-begin #'evil-forward-word-begin :scope 'visible-buffer)
+;; (evilem-make-motion evilem-motion-forward-WORD-begin #'evil-forward-WORD-begin :scope 'visible-buffer)
+;; (evilem-make-motion evilem-motion-forward-word-end #'evil-forward-word-end :scope 'visible-buffer)
+;; (evilem-make-motion evilem-motion-forward-WORD-end #'evil-forward-WORD-end :scope 'visible-buffer)
+;; (evilem-make-motion evilem-motion-backward-word-begin #'evil-backward-word-begin :scope 'visible-buffer)
+;; (evilem-make-motion evilem-motion-backward-WORD-begin #'evil-backward-WORD-begin :scope 'visible-buffer)
+;; (evilem-make-motion evilem-motion-backward-word-end #'evil-backward-word-end :scope 'visible-buffer)
+;; (evilem-make-motion evilem-motion-backward-WORD-end #'evil-backward-WORD-end :scope 'visible-buffer)

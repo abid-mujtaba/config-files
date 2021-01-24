@@ -14,6 +14,9 @@
 ;; Must be defined before the evil package is loaded
 (setq-default evil-want-C-i-jump nil)
 
+;; Log time when the TODO state is changed in an org file
+(setq org-log-done 'time)
+
 (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/evil")
@@ -77,6 +80,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/todo.org")))
  '(package-selected-packages
    (quote
     (evil-org org evil-collection python-black powerline markdown-mode magit evil-magit key-chord git-gutter flycheck evil-visual-mark-mode evil-easymotion evil-commentary elpy company-jedi color-theme-sanityinc-tomorrow))))

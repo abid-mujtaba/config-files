@@ -100,7 +100,7 @@
         // To learn more about selection, visit https://aka.ms/terminal-selection
         // { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
         { "command": "paste", "keys": "ctrl+v" },
-	{ "command": "paste", "keys": "shift+insert" },
+		{ "command": "paste", "keys": "shift+insert" },
 
         // Press Ctrl+Shift+F to open the search box
         { "command": "find", "keys": "ctrl+shift+f" },
@@ -109,6 +109,9 @@
         // - "split": "auto" makes this pane open in the direction that provides the most surface area.
         // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
         // To learn more about panes, visit https://aka.ms/terminal-panes
-        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" }
+        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
+
+       	// Disable alt+enter for entering full-screen so that emacs org mode can use it
+       	{ "command": "null", "keys": "alt+enter" }
     ]
 }

@@ -106,6 +106,12 @@
 ;; Disable menu bar
 (setq-default menu-bar-mode nil)
 
+;; Use Windows to launch browser links
+(setq
+ browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
+ browse-url-generic-args     '("/c" "start")
+ browse-url-browser-function #'browse-url-generic)
+
 ;; Uncomment to make easymotion cross lines for w, b, etc.
 ;;
 ;; (put 'visible-buffer 'bounds-of-thing-at-point (lambda () (cons (window-start) (window-end))))

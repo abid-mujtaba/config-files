@@ -83,7 +83,7 @@
  '(org-agenda-files (quote ("~/todo.org")))
  '(package-selected-packages
    (quote
-    (evil-org org evil-collection python-black powerline markdown-mode magit evil-magit key-chord git-gutter flycheck evil-visual-mark-mode evil-easymotion evil-commentary elpy company-jedi color-theme-sanityinc-tomorrow))))
+    (groovy-mode evil-org org evil-collection python-black powerline markdown-mode magit evil-magit key-chord git-gutter flycheck evil-visual-mark-mode evil-easymotion evil-commentary elpy company-jedi color-theme-sanityinc-tomorrow))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -123,3 +123,12 @@
 ;; (evilem-make-motion evilem-motion-backward-WORD-begin #'evil-backward-WORD-begin :scope 'visible-buffer)
 ;; (evilem-make-motion evilem-motion-backward-word-end #'evil-backward-word-end :scope 'visible-buffer)
 ;; (evilem-make-motion evilem-motion-backward-WORD-end #'evil-backward-WORD-end :scope 'visible-buffer)
+
+;; Change order of C-l (start by moving buffer to the top)
+(setq recenter-positions '(top middle bottom))
+
+;; Allow scrollback after pressing C-l in eshell
+(add-hook 'eshell-mode-hook
+          (defun rm-eshell-postoutput-scroll-to-bottom ()
+            (remove-hook 'eshell-output-filter-functions
+                         'eshell-postoutput-scroll-to-bottom)))

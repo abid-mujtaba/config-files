@@ -83,7 +83,26 @@
  '(org-agenda-files (quote ("~/todo.org")))
  '(package-selected-packages
    (quote
-    (groovy-mode evil-org org evil-collection python-black powerline markdown-mode magit evil-magit key-chord git-gutter flycheck evil-visual-mark-mode evil-easymotion evil-commentary elpy company-jedi color-theme-sanityinc-tomorrow))))
+    (
+      color-theme-sanityinc-tomorrow
+      company-jedi
+      elpy
+      evil-collection
+      evil-commentary
+      evil-easymotion
+      evil-magit
+      evil-org
+      evil-visual-mark-mode
+      flycheck
+      git-gutter
+      groovy-mode
+      key-chord
+      magit
+      markdown-mode
+      org
+      powerline
+      python-black
+    ))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

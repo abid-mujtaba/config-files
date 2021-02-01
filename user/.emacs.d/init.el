@@ -96,6 +96,7 @@
       flycheck
       git-gutter
       groovy-mode
+      jenkinsfile-mode
       key-chord
       magit
       markdown-mode

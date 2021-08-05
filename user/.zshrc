@@ -142,6 +142,8 @@ alias gco="git checkout"
 alias gdc="git diff --cached"
 alias grc="git rebase --continue"
 alias grs="git rebase --skip"
+alias gbD="git branch -D"
+alias gup="git commit --amend --no-edit && git push --force-with-lease"
 
 # Create aliases for jumping up several folders
 alias .1="cd .."
@@ -154,6 +156,9 @@ alias rg="rg --color=always"
 
 # Use e to launch emacsclient inside the terminal
 alias e="emacsclient -t"
+
+# Use mg to launch emacs straight to magit
+alias mg='emacsclient -nw -c --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 
 # Use dc instead of docker-compose
 alias dc="docker-compose"
@@ -251,17 +256,17 @@ if which tmux 2>&1 >/dev/null; then
 	test -z "$TMUX" && (tmux attach 2> /dev/null || tmux new-session)
 fi
 
-# Setup entry in Windows /etc/hosts to allow Chrome to talk to WSL2 servers
-# First copy to /tmp, then delete any existing entries, copy back and append
-HOSTS_FILE="/mnt/c/Windows/System32/drivers/etc/hosts"
-TMP_FOLDER=$(mktemp -d)
-
-cp "${HOSTS_FILE}" "${TMP_FOLDER}/hosts"
-sed '/wsl2/d' -i "${TMP_FOLDER}/hosts"
-cp "${TMP_FOLDER}/hosts" "${HOSTS_FILE}"
-
-echo "$(hostname -I) wsl2" >> "${HOSTS_FILE}"
-
-unset HOSTS_FILE
-unset TMP_FOLDER
+# # Setup entry in Windows /etc/hosts to allow Chrome to talk to WSL2 servers
+# # First copy to /tmp, then delete any existing entries, copy back and append
+# HOSTS_FILE="/c/Windows/System32/drivers/etc/hosts"
+# TMP_FOLDER=$(mktemp -d)
+#
+# cp "${HOSTS_FILE}" "${TMP_FOLDER}/hosts"
+# sed '/wsl2/d' -i "${TMP_FOLDER}/hosts"
+# cp "${TMP_FOLDER}/hosts" "${HOSTS_FILE}"
+#
+# echo "$(hostname -I) wsl2" >> "${HOSTS_FILE}"
+#
+# unset HOSTS_FILE
+# unset TMP_FOLDER
 

@@ -79,9 +79,10 @@ prompt_git() {
 # Dir: current working directory
 prompt_dir() {
   # prompt_segment blue black '%3~'
-  
+
   # Fish style shrunken paths
-  prompt_segment blue black $(shrink_path -f) ' '
+  # Change background color to 039 (requires a 256 color terminal)
+  prompt_segment 039 black $(shrink_path -f) ' '
 
   # prompt_segment blue black "…${PWD: -30}"
 }

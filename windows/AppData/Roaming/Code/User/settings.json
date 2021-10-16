@@ -135,7 +135,13 @@
         "statusBar.noFolderBackground": "#005f5f",
         "statusBar.debuggingBackground": "#005f5f"
     },
-    "telemetry.enableTelemetry": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "terminal.integrated.shell.linux": "/bin/bash",
+    "telemetry.enableTelemetry": false,
+    "extensions.autoUpdate": false,
+    "liveshare.connectionMode": "relay",
+    "liveshare.anonymousGuestApproval": "reject",
+    "liveshare.allowedDomains": [
+        "bloomberg.com"
+    ]
 }

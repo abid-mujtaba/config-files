@@ -1,7 +1,7 @@
 Things to Install:
 
-- Run bbvpn bootstrapper
-- WSL (Ubuntu 18.04)
+- Run bbvpn bootstrapper (with env var INSTALL_WSL2=1)
+- WSL (Ubuntu 20.04)
 - keepass2
 - config files from personal github (vim, zsh, tmux)
 	- Install oh-my-zsh and powerlevel10k using: https://medium.com/appstud/web-development-setup-on-windows-wsl-ubuntu-windows-terminal-oh-my-zsh-powerlevel10k-efcfc9a1c260
@@ -14,11 +14,13 @@ Things to Install:
 - Windows Terminal Preview
 	- Install from Microsoft Store
 	- Edit settings json file
-		1. Change defaultProfile to be Ubuntu 18.04 (WSL)
-		2. Add the following to the Ubuntu 18.04 (WSL) profile object:
+		1. Change defaultProfile to be Ubuntu 20.04 (WSL)
+		2. Add the following to the Ubuntu 20.04 (WSL) profile object:
 
-			"startingDirectory": "//wsl$/Ubuntu-18.04/home/abid/",
+			"startingDirectory": "//wsl$/Ubuntu-20.04/home/abid/",
 			"cursorShape": "filledBox",
 			"cursorColor": "#bbbbbb",
-			"fontFace": "SauceCodePro NF",
-			"fontWeight": "semi-bold"
+			"font": {
+				"face": "SauceCodePro NF",
+				"weight": "semi-bold"
+			}

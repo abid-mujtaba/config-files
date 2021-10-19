@@ -1,3 +1,8 @@
+# Launch tmux by default
+if [ -z "$TMUX" ]; then
+	exec tmux new-session -A -s workspace
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -83,9 +88,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	autojump docker docker-compose git shrink-path vi-mode zsh-autosuggestions zsh-easy-motion zsh-syntax-highlighting zsh-z
+	docker docker-compose git shrink-path vi-mode zsh-autosuggestions zsh-easy-motion zsh-syntax-highlighting zsh-z
 )
 # Note: zsh-autosuggestions must be installed/cloned in to ~/.oh-my-zsh/custom/plugins/
+# Possible addition: autojump
 
 source $ZSH/oh-my-zsh.sh
 
@@ -253,12 +259,6 @@ bindkey " " magic-space
 
 # Use , as the leader key for easymotion
 bindkey -M vicmd ',' vi-easy-motion
-
-# Launch tmux by default
-alias tmux="tmux -2 -u"
-if which tmux 2>&1 >/dev/null; then
-	test -z "$TMUX" && (tmux attach 2> /dev/null || tmux new-session)
-fi
 
 # # Setup entry in Windows /etc/hosts to allow Chrome to talk to WSL2 servers
 # # First copy to /tmp, then delete any existing entries, copy back and append

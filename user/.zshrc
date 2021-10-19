@@ -24,7 +24,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -35,11 +35,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -51,6 +56,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -70,8 +78,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
@@ -123,10 +131,10 @@ unsetopt BG_NICE
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
 # Add SSH keys to agent
-if ! [ -f /tmp/ssh-keys-added ]; then
-	$HOME/bin/add-ssh-keys
-	touch /tmp/ssh-keys-added
-fi
+# if ! [ -f /tmp/ssh-keys-added ]; then
+# 	$HOME/bin/add-ssh-keys
+# 	touch /tmp/ssh-keys-added
+# fi
 
 # Set style of zsh autocompletion suggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
@@ -155,10 +163,10 @@ alias .4="cd ../../../.."
 alias rg="rg --color=always"
 
 # Use e to launch emacsclient inside the terminal
-alias e="emacsclient -t"
+# alias e="emacsclient -t"
 
 # Use mg to launch emacs straight to magit
-alias mg='emacsclient -nw -c --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+# alias mg='emacsclient -nw -c --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 
 # Use dc instead of docker-compose
 alias dc="docker-compose"
@@ -186,16 +194,12 @@ export PATH=$PATH:$HOME/gems/bin
 # Set DISPLAY for X applications. Remember to run XMing in Windows before-hand.
 export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
 
-# Set Docker Host
-# export DOCKER_HOST=tcp://0.0.0.0:2375
-# export DOCKER_HOST=tcp://localhost:2375
-
 # Set work folder with full windows path (for mounting volumes to docker)
-export whome=/c/Users/MujtabaAbidHasan
-export work=/c/Users/MujtabaAbidHasan/work
-export workspace=/c/Users/MujtabaAbidHasan/work/workspace
+export whome=/c/Users/amujtaba4
+export work=/c/Users/amujtaba4/work
+export workspace=/c/Users/amujtaba4/work/workspace
 # Set windows root folder to be used by docker scripts
-export DOCKER_ROOT=$work
+# export DOCKER_ROOT=$work
 
 # Do not use proxy for the DPKG API
 export no_proxy=$no_proxy,blp-dpkg.dev.bloomberg.com

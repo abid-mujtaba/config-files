@@ -3,12 +3,26 @@ Things to Install:
 - Run bbvpn bootstrapper (with env var INSTALL_WSL2=1)
 - WSL (Ubuntu 20.04)
 - keepass2
+- install fzf
+  - git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  - https_proxy=http://proxy.bloomberg.com:81 ~/.fzf/install
+- install gh (Github CLI)
 - config files from personal github (vim, zsh, tmux)
-	- Install oh-my-zsh and powerlevel10k using: https://medium.com/appstud/web-development-setup-on-windows-wsl-ubuntu-windows-terminal-oh-my-zsh-powerlevel10k-efcfc9a1c260
+	- Install oh-my-zsh, zsh plugins, and powerlevel10k using: https://yduman.github.io/blog/wsl2-setup/
+- Additional oh-my-zsh plugins:
+	1. zsh-easy-motion: https://github.com/IngoMeyer441/zsh-easy-motion
+	   - Clone repo into $ZSH_CUSTOM/plugins
+	   - Rename `easy_motion.plugin.zsh` to `zsh-easy-motion.plugin.zsh`
+	2. zsh-z: https://github.com/agkozak/zsh-z
 - Install patched Source Code Pro fonts (named SauceCodePro) with weight semi-bold from:
 	https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Semibold/complete/Sauce%20Code%20Pro%20Semibold%20Nerd%20Font%20Complete%20Mono%20Windows%20Compatible.ttf
 - Vundle for Vim plugins
 - OhMyZsh
+  - Because of proxy issues:
+    1. curl -fsSL <url> > /tmp/install.sh
+	2. chmod +x /tmp/install.sh
+	3. sh -c /tmp/install.sh
+- If p10k stalls on 'fetching gitstatusd' set the http proxies before running `exec zsh`
 - XMing
 - Set up Github and BBGithub: http://tutti.prod.bloomberg.com/go-git-go-docs/configuration
 - Windows Terminal Preview

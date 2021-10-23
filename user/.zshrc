@@ -274,3 +274,4 @@ bindkey -M vicmd ',' vi-easy-motion
 # unset HOSTS_FILE
 # unset TMP_FOLDER
 
+eval "$(pyenv init -)"

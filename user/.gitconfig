@@ -1,0 +1,28 @@
+[user]
+	name = Abid H. Mujtaba
+	email = amujtaba4@bloomberg.net
+
+[credential]
+	helper = store
+
+[url "bbgithub:"]
+	insteadOf = https://bbgithub.dev.bloomberg.com/
+
+[http "https://github.com"]
+	proxy = http://proxy.bloomberg.com:81
+	sslCAinfo = ~/.bb-cert/bloomberg-root-ca.crt
+
+[url "https://github.com/"]
+	insteadOf = github.com:
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[url "https://github.com/"]
+	insteadOf = ssh://git@github.com/
+
+[init]
+	defaultBranch = main
+[pager]
+	branch = false
+	log = false
+[fetch]
+	prune = true
